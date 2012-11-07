@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp href="launch.jnlp" spec="1.0+">
+    <information>
+        <title>ProjetoBuscaBinaria</title>
+        <vendor>Administrador</vendor>
+        <homepage href=""/>
+        <description>ProjetoBuscaBinaria</description>
+        <description kind="short">ProjetoBuscaBinaria</description>
+    <offline-allowed/>
+</information>
+    <update check="background"/>
+    <resources>
+        <j2se version="1.7+"/>
+        <jar href="ProjetoBuscaBinaria.jar" main="true"/>
+    <jar href="lib/deploy.jar"/>
+<jar href="lib/jfxrt.jar"/>
+<jar href="lib/plugin.jar"/>
+</resources>
+    <application-desc main-class="br.ufpb.saed.Main">
+    </application-desc>
+</jnlp>
