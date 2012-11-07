@@ -46,8 +46,8 @@ public class Main extends Application {
     private Label checked, lblDigiteNumero, caption, unChecked, bg, mensagens, start, apresentacao, valorP;
     private Group root;
     private Button btnBuscar;
-    private Rectangle r1, r2;
-
+    private Rectangle boxLeft, r2;
+    private Rectangle boxRight;
     private Image imgError, inicio;
     private Button btnBuscaBinaria;
     private Button btnCreditos;
@@ -73,7 +73,7 @@ public class Main extends Application {
         root = new Group();
         final Scene scene = new Scene(root, 800, 700, Color.ANTIQUEWHITE);
 
-        this.vetor = new Vetor(new Point2D(200, 140), 10);
+        this.vetor = new Vetor(new Point2D(160, 140), 10);
 
         //Animacao do vetor e ordena
         animationTimer = new AnimationTimer() {
@@ -118,7 +118,7 @@ public class Main extends Application {
         start.setGraphic(new ImageView(inicio));
         //start.setOpacity(0.8);
 
-        r2 = new Rectangle(520, 450);
+        r2 = new Rectangle(600, 450);
         r2.setLayoutX(150);
         r2.setFill(Color.WHITE);
         r2.setLayoutY(100);
@@ -131,7 +131,7 @@ public class Main extends Application {
 
         translateTransition = new TranslateTransition(Duration.millis(2000), start);
         translateTransition.setFromX(50);
-        translateTransition.setToX(1001);
+        translateTransition.setToX(300);
      
         //Titulo
         caption = new Label();
@@ -156,21 +156,20 @@ public class Main extends Application {
         btnBuscar.setMinSize(80, 40);
         btnBuscar.setFont(new Font(20));
         btnBuscar.setTooltip(new Tooltip("Realiza uma pesquisa binária"));
-        btnBuscar.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
+        btnBuscar.setStyle("-fx-font: 18 arial; -fx-base: #CCC;");
         btnBuscar.setGraphic(new ImageView(image));
 
 
         //Gerar Vetor
-        Image image2 = new Image(getClass().getResourceAsStream("plus.png"));
         btnGerarVetor = new Button();
         btnGerarVetor.setLayoutX(90);
         btnGerarVetor.setLayoutY(70);
         btnGerarVetor.setMinSize(80, 40);
         btnGerarVetor.setFont(new Font(20));
-        btnGerarVetor.setText(" Gerar Vetor ");
-        btnGerarVetor.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
+        btnGerarVetor.setText("Gerar Vetor");
+        btnGerarVetor.setStyle("-fx-font: 18 arial; -fx-base: #CCC;");
         btnGerarVetor.setTooltip(new Tooltip("Gera um vetor"));
-        btnGerarVetor.setGraphic(new ImageView(image2));
+
 
         //Bontão iniciar
         Image imgInicial = new Image(getClass().getResourceAsStream("startImg.png"));
@@ -224,19 +223,27 @@ public class Main extends Application {
         unChecked.setLayoutY(610);
 
         //BackGround
-        Image imgBackground = new Image(getClass().getResourceAsStream("bg.jpg"));
+        Image imgBackground = new Image(getClass().getResourceAsStream("bg.png"));
         bg = new Label();
         bg.setGraphic(new ImageView(imgBackground));
 
         //Retangulo de mensagens
-        r1 = new Rectangle(300, 120);
-        r1.setLayoutY(550);
-        r1.setLayoutX(20);
-        r1.setArcHeight(20);
-        r1.setArcWidth(20);
-        r1.setFill(Color.GREEN);
-        r1.setOpacity(0.40);
+        boxLeft = new Rectangle(370, 120);
+        boxLeft.setLayoutY(550);
+        boxLeft.setLayoutX(20);
+        boxLeft.setArcHeight(20);
+        boxLeft.setArcWidth(20);
+        boxLeft.setFill(Color.GRAY);
+        boxLeft.setOpacity(0.40);
 
+        //Retangulo de mensagens
+        boxRight = new Rectangle(370, 120);
+        boxRight.setLayoutY(550);
+        boxRight.setLayoutX(420);
+        boxRight.setArcHeight(20);
+        boxRight.setArcWidth(20);
+        boxRight.setFill(Color.GRAY);
+        boxRight.setOpacity(0.40);
         //Box de Mensagens
 
         mensagens = new Label("Algumas infomações aparecerá\naqui, sobre  a  execução  do\n Algoritmo ou erros");
@@ -278,7 +285,7 @@ public class Main extends Application {
             public void handle(ActionEvent t) {
                 root.getChildren().remove(start);
                 root.getChildren().add(apresentacao);
-            
+                removerBotoesMenu(root);
             }
         });
 
@@ -288,8 +295,10 @@ public class Main extends Application {
 
             @Override
             public void handle(ActionEvent e) {
+                
                 fadeTransition.play();
                 translateTransition.play();
+                
                 removerBotoesMenu(root);
                 root.getChildren().remove(r2);
                 root.getChildren().remove(apresentacao);
@@ -338,6 +347,7 @@ public class Main extends Application {
             public void handle(ActionEvent e) {
                 isVetorGerado = true;
                 removerBotoesBusca();
+            
                 root.getChildren().remove(checked);
                 root.getChildren().remove(unChecked);
                 root.getChildren().remove(valorP);
@@ -360,10 +370,6 @@ public class Main extends Application {
                 root.getChildren().add(vetor);
                 
                 adicionarBotoesBusca();
-                
-
-
-
 
             }
         });
@@ -376,8 +382,9 @@ public class Main extends Application {
 
         root.getChildren().add(caption);
         root.getChildren().add(mensagens);
-        root.getChildren().add(r1); 
-        
+        root.getChildren().add(boxLeft); 
+        root.getChildren().add(boxRight); 
+
         root.getChildren().add(r2);
         root.getChildren().add(start);
       
@@ -483,9 +490,7 @@ public class Main extends Application {
     //Animação se houve igualdade na busca
     public void animationChecked() {
 
-
         root.getChildren().add(checked);
-
         RotateTransition rotateTransition =
                 new RotateTransition(Duration.millis(2000), checked);
         rotateTransition.setByAngle(360f);
@@ -506,8 +511,6 @@ public class Main extends Application {
         rotateTransition.setCycleCount(2);
         rotateTransition.setAutoReverse(true);
         rotateTransition.play();
-
-
 
     }
 }

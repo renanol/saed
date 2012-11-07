@@ -51,7 +51,7 @@ public class Celula extends Group{
         value.setFont(new Font(25));
         value.setFill(Color.GOLD);
        
-        id = new Text(p.getX() + Celula.DIMENSAO/2, p.getY() + Celula.DIMENSAO + 20, String.valueOf(i));
+        id = new Text(p.getX() + Celula.DIMENSAO/2 - 5, p.getY() + Celula.DIMENSAO + 17, String.valueOf(i));
         v = i;
         
         getChildren().addAll(lblImg, value, id);
@@ -77,7 +77,7 @@ public class Celula extends Group{
     }
     
     public void Repintar(){
-        this.value.setFill(Color.BLUE);
+        this.value.setFill(Color.RED);
     }
     
     public void moveLeft(EventHandler<ActionEvent> value){
